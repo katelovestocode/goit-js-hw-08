@@ -46,6 +46,7 @@ function populateTextarea() {
       refs.textarea.value = objectMessage.message;
     } catch (error) {
       console.log(error.message);
+      console.log(error.name);
     }
   } else {
     refs.input.value = '';

@@ -40,7 +40,7 @@ function populateTextarea() {
   // else - clearing the input and the textarea
   if (savedMessage) {
     try {
-      objectMessage = JSON.parse(savedMessage);
+      let objectMessage = JSON.parse(savedMessage);
 
       refs.input.value = objectMessage.email;
       refs.textarea.value = objectMessage.message;

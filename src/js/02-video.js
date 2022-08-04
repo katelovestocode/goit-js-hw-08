@@ -16,7 +16,7 @@ let storageTime = localStorage.getItem(STORAGE_TIME);
 try {
   if (storageTime) {
     const storageTimeParsed = JSON.parse(storageTime);
-    const storageTimeSeconds = storageTimeParsed['seconds'];
+    const storageTimeSeconds = storageTimeParsed;
     if (storageTimeSeconds) {
       player.setCurrentTime(storageTimeSeconds);
     } else {
@@ -30,8 +30,8 @@ try {
 /** function onPlay is saving to the localStorage an object with playback information
     that is passed in the "data" parameter */
 const onPlay = function (data) {
-  localStorage.setItem(STORAGE_TIME, JSON.stringify(data));
-  console.log(data);
+  localStorage.setItem(STORAGE_TIME, JSON.stringify(data['seconds']));
+  console.log(data['seconds']);
 };
 
 /** calling a function onPlay and tracking of current time playback by:

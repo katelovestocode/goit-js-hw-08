@@ -12,7 +12,7 @@ refs.form.addEventListener('input', throttle(savingData, 500));
 const STORAGE_KEY = 'feedback-form-state';
 
 // an object that keeps the input and textarea info
-const formData = {};
+let formData = {};
 
 // function that helps to save data from the form textarea and input
 function savingData(event) {
@@ -21,8 +21,7 @@ function savingData(event) {
 
   // saving into the object formData name and the value
   formData[event.target.name] = event.target.value;
-  // display the object with the email and message fields and their current values in the console
-  console.log(formData);
+
   //saving data to the localStorage from the object formData and brining to the string type
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
@@ -41,9 +40,8 @@ function populateTextarea() {
   if (savedMessage) {
     try {
       let objectMessage = JSON.parse(savedMessage);
-
-      refs.input.value = objectMessage.email;
-      refs.textarea.value = objectMessage.message;
+      if (objectMessage.email) refs.input.value = objectMessage.email;
+      if (objectMessage.message) refs.textarea.value = objectMessage.message;
     } catch (error) {
       console.log(error.message);
       console.log(error.name);
@@ -62,6 +60,10 @@ function onFormSubmit(evt) {
 
   // clearing a form when submit
   evt.currentTarget.reset();
+
+  // display the object with the email and message fields and their current values in the console
+  console.log(formData);
+  formData = {};
 
   // removing storageKey info from the localStorage
   localStorage.removeItem(STORAGE_KEY);

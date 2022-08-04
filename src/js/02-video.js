@@ -17,7 +17,7 @@ try {
   if (storageTime) {
     const storageTimeParsed = JSON.parse(storageTime);
     const storageTimeSeconds = storageTimeParsed;
-    if (storageTimeSeconds) {
+    if (storageTimeSeconds && storageTimeSeconds > 0) {
       player.setCurrentTime(storageTimeSeconds);
     } else {
       localStorage.removeItem(STORAGE_TIME);

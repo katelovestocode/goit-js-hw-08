@@ -40,8 +40,18 @@ function populateTextarea() {
   if (savedMessage) {
     try {
       let objectMessage = JSON.parse(savedMessage);
-      if (objectMessage.email) refs.input.value = objectMessage.email;
-      if (objectMessage.message) refs.textarea.value = objectMessage.message;
+      Object.entries(objectMessage).forEach(([key, value]) => {
+        formData[key] = value;
+        refs.form.elements[key].value = value;
+      });
+      // OR
+      // if (savedMessage) {
+      //   try {
+      //     let objectMessage = JSON.parse(savedMessage);
+      //     formData['email'] = objectMessage.email;
+      //     formData['message'] = objectMessage.message;
+      //     if (objectMessage.email) refs.input.value = objectMessage.email;
+      //     if (objectMessage.message) refs.textarea.value = objectMessage.message;
     } catch (error) {
       console.log(error.message);
       console.log(error.name);
